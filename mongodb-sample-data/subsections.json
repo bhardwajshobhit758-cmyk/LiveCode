@@ -1,0 +1,65 @@
+[
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b1"},
+    "title": "Introduction to React",
+    "timeDuration": "15:30",
+    "description": "Learn the basics of React and understand component-based architecture.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-react-intro"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b2"},
+    "title": "React Components and Props",
+    "timeDuration": "22:45",
+    "description": "Deep dive into React components, props, and component composition.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-react-components"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b3"},
+    "title": "State Management with useState",
+    "timeDuration": "18:20",
+    "description": "Learn how to manage state in React using the useState hook.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-react-state"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b4"},
+    "title": "Introduction to Node.js",
+    "timeDuration": "20:15",
+    "description": "Get started with Node.js and understand server-side JavaScript.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-nodejs-intro"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b5"},
+    "title": "Express.js Basics",
+    "timeDuration": "25:40",
+    "description": "Learn how to create RESTful APIs using Express.js framework.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-express-basics"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b6"},
+    "title": "MongoDB Integration",
+    "timeDuration": "30:10",
+    "description": "Connect your Node.js application to MongoDB database.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-mongodb-integration"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b7"},
+    "title": "Introduction to Python for Data Science",
+    "timeDuration": "28:35",
+    "description": "Learn Python fundamentals for data science applications.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-python-datascience"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b8"},
+    "title": "NumPy and Pandas Basics",
+    "timeDuration": "32:50",
+    "description": "Master data manipulation with NumPy and Pandas libraries.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-numpy-pandas"
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d2b9"},
+    "title": "Data Visualization with Matplotlib",
+    "timeDuration": "26:15",
+    "description": "Create stunning data visualizations using Matplotlib and Seaborn.",
+    "videoUrl": "https://www.youtube.com/watch?v=sample-matplotlib"
+  }
+]

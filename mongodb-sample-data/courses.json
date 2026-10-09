@@ -1,0 +1,86 @@
+[
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d1a1"},
+    "courseName": "Complete React Development Course",
+    "courseDescription": "Master React from basics to advanced concepts. Build modern, scalable web applications with React, Redux, and more.",
+    "instructor": {"$oid": "65a1b2c3d4e5f6a7b8c9d0f1"},
+    "whatYouWillLearn": "You will learn React fundamentals, component architecture, state management, hooks, routing, and best practices for building production-ready applications.",
+    "courseContent": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2a1"}
+    ],
+    "ratingAndReviews": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d4a1"}
+    ],
+    "price": 2999,
+    "thumbnail": "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
+    "category": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c1"},
+    "tag": ["React", "JavaScript", "Frontend", "Web Development"],
+    "studentsEnrolled": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d0f2"}
+    ],
+    "instructions": [
+      "Basic knowledge of HTML, CSS, and JavaScript is required",
+      "A computer with internet connection",
+      "Text editor (VS Code recommended)",
+      "Node.js installed on your system"
+    ],
+    "status": "Published",
+    "createdAt": {"$date": "2024-01-12T10:30:00.000Z"},
+    "updatedAt": {"$date": "2024-01-12T10:30:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d1a2"},
+    "courseName": "Full Stack Development with MERN",
+    "courseDescription": "Learn to build full-stack web applications using MongoDB, Express.js, React, and Node.js. Complete end-to-end development course.",
+    "instructor": {"$oid": "65a1b2c3d4e5f6a7b8c9d0f1"},
+    "whatYouWillLearn": "Build complete web applications from scratch using the MERN stack. Learn authentication, database design, RESTful APIs, and deployment strategies.",
+    "courseContent": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2a1"},
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2a2"}
+    ],
+    "ratingAndReviews": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d4a2"}
+    ],
+    "price": 4999,
+    "thumbnail": "https://images.unsplash.com/photo-1627398242454-45a1465c2479",
+    "category": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c1"},
+    "tag": ["MERN", "Full Stack", "MongoDB", "Express", "React", "Node.js"],
+    "studentsEnrolled": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d0f5"}
+    ],
+    "instructions": [
+      "Good understanding of JavaScript required",
+      "Basic knowledge of React is recommended",
+      "Computer with at least 8GB RAM",
+      "Install Node.js, MongoDB, and VS Code"
+    ],
+    "status": "Published",
+    "createdAt": {"$date": "2024-01-11T08:00:00.000Z"},
+    "updatedAt": {"$date": "2024-01-11T08:00:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d1a3"},
+    "courseName": "Data Science with Python - Complete Bootcamp",
+    "courseDescription": "Comprehensive data science course covering Python programming, data analysis, machine learning, and data visualization.",
+    "instructor": {"$oid": "65a1b2c3d4e5f6a7b8c9d0f4"},
+    "whatYouWillLearn": "Master Python for data science, learn to analyze data using Pandas and NumPy, create visualizations, and build machine learning models.",
+    "courseContent": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2a3"}
+    ],
+    "ratingAndReviews": [],
+    "price": 3999,
+    "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+    "category": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c3"},
+    "tag": ["Python", "Data Science", "Machine Learning", "Data Analysis"],
+    "studentsEnrolled": [],
+    "instructions": [
+      "No prior programming experience required",
+      "Computer with Python 3.8+ installed",
+      "Jupyter Notebook or Google Colab",
+      "Enthusiasm to learn data science"
+    ],
+    "status": "Published",
+    "createdAt": {"$date": "2024-01-10T08:00:00.000Z"},
+    "updatedAt": {"$date": "2024-01-10T08:00:00.000Z"}
+  }
+]

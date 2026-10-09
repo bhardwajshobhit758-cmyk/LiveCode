@@ -1,0 +1,32 @@
+[
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c1"},
+    "name": "Web Development",
+    "description": "Learn modern web development technologies including HTML, CSS, JavaScript, React, Node.js and more.",
+    "courses": [{"$oid": "65a1b2c3d4e5f6a7b8c9d1a1"}, {"$oid": "65a1b2c3d4e5f6a7b8c9d1a2"}]
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c2"},
+    "name": "Mobile Development",
+    "description": "Master mobile app development for iOS and Android using React Native, Flutter, and native technologies.",
+    "courses": []
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c3"},
+    "name": "Data Science",
+    "description": "Explore data science, machine learning, AI, and data analysis with Python and R.",
+    "courses": [{"$oid": "65a1b2c3d4e5f6a7b8c9d1a3"}]
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c4"},
+    "name": "Cloud Computing",
+    "description": "Learn cloud platforms like AWS, Azure, and Google Cloud. Master DevOps and cloud architecture.",
+    "courses": []
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d0c5"},
+    "name": "Cybersecurity",
+    "description": "Understand cybersecurity principles, ethical hacking, network security, and information security.",
+    "courses": []
+  }
+]

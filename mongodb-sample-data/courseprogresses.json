@@ -1,0 +1,22 @@
+[
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d3a1"},
+    "courseID": {"$oid": "65a1b2c3d4e5f6a7b8c9d1a1"},
+    "userId": {"$oid": "65a1b2c3d4e5f6a7b8c9d0f2"},
+    "completedVideos": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2b1"},
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2b2"}
+    ]
+  },
+  {
+    "_id": {"$oid": "65a1b2c3d4e5f6a7b8c9d3a2"},
+    "courseID": {"$oid": "65a1b2c3d4e5f6a7b8c9d1a2"},
+    "userId": {"$oid": "65a1b2c3d4e5f6a7b8c9d0f5"},
+    "completedVideos": [
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2b1"},
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2b2"},
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2b3"},
+      {"$oid": "65a1b2c3d4e5f6a7b8c9d2b4"}
+    ]
+  }
+]
