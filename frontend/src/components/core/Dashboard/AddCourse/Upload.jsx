@@ -22,11 +22,13 @@ export default function Upload({ name, label, register, setValue, errors, video 
     }
   }
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     accept: !video
-      ? { "image/*": [".jpeg", ".jpg", ".png"] }
-      : { "video/*": [".mp4"] },
+      ? { "image/*": [".jpeg", ".jpg", ".png", ".webp", ".svg"] }
+      : { "video/*": [".mp4", ".mkv", ".webm"] },
     onDrop,
+    noClick: false,
+    noKeyboard: false,
   })
 
   const previewFile = (file) => {
@@ -56,14 +58,16 @@ export default function Upload({ name, label, register, setValue, errors, video 
       <div
         className={`${isDragActive ? "bg-richblack-600" : "bg-richblack-700"}
          flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
+        {...(!previewSource ? getRootProps() : {})}
       >
+        <input {...getInputProps()} id={name} />
         {previewSource ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
               <img
                 src={previewSource}
                 alt="Preview"
-                className="h-full w-full rounded-md object-cover"
+                className="h-full w-full rounded-md object-cover max-h-[350px]"
                 crossOrigin="anonymous"
               />
             ) : (
@@ -78,32 +82,37 @@ export default function Upload({ name, label, register, setValue, errors, video 
             {!viewData && (
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   setPreviewSource("")
                   setSelectedFile(null)
                   setValue(name, null)
                 }}
-                className="mt-3 text-richblack-400 underline"
+                className="mt-3 text-richblack-400 underline hover:text-richblack-200"
               >
-                Cancel
+                Cancel / Choose another
               </button>
             )}
           </div>
         ) : (
-          <div
-            className="flex w-full flex-col items-center p-6"
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} ref={inputRef} />
+          <div className="flex w-full flex-col items-center p-6 text-center select-none">
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
-            <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
+            <p className="mt-2 max-w-[260px] text-center text-sm text-richblack-200">
               Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-              <span className="font-semibold text-yellow-50">Browse</span> a
-              file
+              <span
+                onClick={(e) => {
+                  e.stopPropagation()
+                  open()
+                }}
+                className="font-semibold text-yellow-50 underline cursor-pointer hover:text-yellow-100"
+              >
+                Browse
+              </span>{" "}
+              a file
             </p>
-            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
+            <ul className="mt-8 flex list-disc justify-between space-x-12 text-center text-xs text-richblack-200">
               <li>Aspect ratio 16:9</li>
               <li>Recommended size 1024x576</li>
             </ul>
