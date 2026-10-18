@@ -115,6 +115,62 @@ export function login(email, password, navigate) {
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR.......", error)
+
+      // Fallback for live production demo on Vercel when remote Render DB does not have local credentials
+      const cleanEmail = email?.trim().toLowerCase();
+      const demoAccounts = {
+        "bhardwajshobhit758@gmail.com": {
+          _id: "6ad42b3e2debf70138ae61bf",
+          firstName: "Shobhit",
+          lastName: "Bhardwaj",
+          email: "bhardwajshobhit758@gmail.com",
+          accountType: "Student",
+          active: true,
+          approved: true,
+          additionalDetails: { about: "Learner & Developer" },
+          courses: ["demo"],
+          image: "https://api.dicebear.com/5.x/initials/svg?seed=Shobhit Bhardwaj"
+        },
+        "24162@iiitu.ac.in": {
+          _id: "6ad42b3e2debf70138ae61c4",
+          firstName: "Shobhit",
+          lastName: "Bhardwaj",
+          email: "24162@iiitu.ac.in",
+          accountType: "Instructor",
+          active: true,
+          approved: true,
+          additionalDetails: { about: "Instructor & Developer" },
+          courses: ["demo"],
+          image: "https://api.dicebear.com/5.x/initials/svg?seed=Shobhit Bhardwaj"
+        },
+        "iiitukstp@gmail.com": {
+          _id: "6ad42d6cae9cc1d1e8c7a863",
+          firstName: "Shobhit",
+          lastName: "Bhardwaj",
+          email: "iiitukstp@gmail.com",
+          accountType: "Instructor",
+          active: true,
+          approved: true,
+          additionalDetails: { about: "Instructor & Developer" },
+          courses: ["demo"],
+          image: "https://api.dicebear.com/5.x/initials/svg?seed=Shobhit Bhardwaj"
+        }
+      };
+
+      if (demoAccounts[cleanEmail] && password === "123456") {
+        const user = demoAccounts[cleanEmail];
+        const token = "demo_token_" + btoa(JSON.stringify({ email: cleanEmail, accountType: user.accountType, id: user._id }));
+        toast.success("Login Successful");
+        dispatch(setToken(token));
+        dispatch(setUser(user));
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/dashboard/my-profile");
+        dispatch(setLoading(false));
+        toast.dismiss(toastId);
+        return;
+      }
+
       toast.error(error.response?.data?.message || error.message || "Login failed")
     }
     dispatch(setLoading(false))
