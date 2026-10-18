@@ -33,9 +33,21 @@ exports.connectDB = async () => {
     }
 
     try {
+        const path = require('path');
+        const fs = require('fs');
         const { MongoMemoryServer } = require('mongodb-memory-server');
+
+        const localDataDir = path.join(__dirname, '../../.local-mongo-data');
+        if (!fs.existsSync(localDataDir)) {
+            fs.mkdirSync(localDataDir, { recursive: true });
+        }
+
         mongodInstance = await MongoMemoryServer.create({
-            instance: { dbName: 'learnx' }
+            instance: {
+                dbName: 'learnx',
+                dbPath: localDataDir,
+                storageEngine: 'wiredTiger'
+            }
         });
         const memoryUri = mongodInstance.getUri();
         console.log('Local embedded MongoDB running at:', memoryUri);
@@ -44,7 +56,7 @@ exports.connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        console.log('Connected to local embedded MongoDB successfully!');
+        console.log('Connected to local embedded MongoDB successfully (Persisted to disk)!');
         await seedDatabase();
     } catch (memErr) {
         console.error('Failed to start local embedded MongoDB:', memErr.message);

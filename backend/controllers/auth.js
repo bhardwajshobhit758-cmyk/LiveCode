@@ -15,8 +15,8 @@ const { passwordUpdated } = require("../mail/templates/passwordUpdate");
 exports.sendOTP = async (req, res) => {
     try {
 
-        // fetch email from re.body 
-        const { email } = req.body;
+        // fetch email from req.body and normalize
+        const email = req.body.email ? req.body.email.trim().toLowerCase() : '';
 
         // check user already exist ?
         const checkUserPresent = await User.findOne({ email });
@@ -36,8 +36,7 @@ exports.sendOTP = async (req, res) => {
             lowerCaseAlphabets: false,
             specialChars: false
         })
-        // console.log('Your otp - ', otp);
-
+        console.log('>>> [LIVECODE OTP CODE]:', otp, 'for', email);
         const name = email.split('@')[0].split('.').map(part => part.replace(/\d+/g, '')).join(' ');
         console.log(name);
 
@@ -73,8 +72,10 @@ exports.sendOTP = async (req, res) => {
 exports.signup = async (req, res) => {
     try {
         // extract data 
-        const { firstName, lastName, email, password, confirmPassword,
+        let { firstName, lastName, email, password, confirmPassword,
             accountType, contactNumber, otp } = req.body;
+
+        if (email) email = email.trim().toLowerCase();
 
         // validation
         if (!firstName || !lastName || !email || !password || !confirmPassword || !accountType || !otp) {
@@ -168,7 +169,8 @@ exports.signup = async (req, res) => {
 // ================ LOGIN ================
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        let { email, password } = req.body;
+        if (email) email = email.trim().toLowerCase();
 
         // validation
         if (!email || !password) {

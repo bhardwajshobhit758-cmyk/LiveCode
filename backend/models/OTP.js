@@ -4,7 +4,9 @@ const mailSender = require('../utils/mailSender');
 const OTPSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        lowercase: true
     },
     otp: {
         type: String,

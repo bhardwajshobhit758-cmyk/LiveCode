@@ -43,21 +43,22 @@ exports.capturePayment = async (req, res) => {
                 totalAmount += course.price;
 
                 // Create line items for Stripe
+                const isValidThumbnail = course.thumbnail && (course.thumbnail.startsWith("http://") || course.thumbnail.startsWith("https://"));
                 lineItems.push({
                     price_data: {
                         currency: 'inr',
                         product_data: {
                             name: course.courseName,
-                            description: course.courseDescription,
-                            images: [course.thumbnail],
+                            ...(course.courseDescription ? { description: course.courseDescription.substring(0, 500) } : {}),
+                            ...(isValidThumbnail ? { images: [course.thumbnail] } : {}),
                         },
-                        unit_amount: course.price * 100, // Stripe expects amount in smallest currency unit (paise for INR)
+                        unit_amount: Math.round(course.price * 100), // Stripe expects amount in smallest currency unit (paise for INR)
                     },
                     quantity: 1,
                 });
             }
             catch (error) {
-                console.log(error);
+                console.error("Error preparing course line items:", error);
                 return res.status(500).json({ success: false, message: error.message });
             }
         }
@@ -84,8 +85,13 @@ exports.capturePayment = async (req, res) => {
         });
     }
     catch (error) {
-        console.log(error);
-        return res.status(500).json({ success: false, message: "Could not Initiate Payment Session" });
+        console.error("Stripe capturePayment error:", error?.message || error);
+        return res.status(500).json({ 
+            success: false, 
+            message: error?.message?.includes("Invalid API Key")
+                ? "Invalid Stripe Secret Key. Please configure STRIPE_SECRET_KEY in backend/.env"
+                : (error?.message || "Could not Initiate Payment Session")
+        });
     }
 }
 
@@ -174,21 +180,21 @@ const enrollStudents = async (courses, userId, res) => {
                 { new: true }
             );
 
-            // Send an email notification to the enrolled student
-            const emailResponse = await mailSender(
-                enrolledStudent.email,
-                `Successfully Enrolled into ${enrolledCourse.courseName}`,
-                courseEnrollmentEmail(enrolledCourse.courseName, `${enrolledStudent.firstName}`)
-            );
-            
-            console.log("Email Sent Successfully", emailResponse);
+            // Send an email notification to the enrolled student (non-blocking)
+            try {
+                const emailResponse = await mailSender(
+                    enrolledStudent.email,
+                    `Successfully Enrolled into ${enrolledCourse.courseName}`,
+                    courseEnrollmentEmail(enrolledCourse.courseName, `${enrolledStudent.firstName}`)
+                );
+                console.log("Email Sent Successfully", emailResponse);
+            } catch (emailErr) {
+                console.error("Non-critical: Failed to send enrollment email:", emailErr?.message || emailErr);
+            }
         }
         catch (error) {
-            console.log(error);
-            return res.status(500).json({ 
-                success: false, 
-                message: error.message 
-            });
+            console.error("Error enrolling student in course:", error);
+            throw error;
         }
     }
 }

@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IoArrowBack } from 'react-icons/io5';
 import Editor from '@monaco-editor/react';
 import * as Y from 'yjs';
 import { MonacoBinding } from 'y-monaco';
 
 export default function LectureRecorder() {
+  const navigate = useNavigate();
   const [recording, setRecording] = useState(false);
   const [codeStream, setCodeStream] = useState([]);
   const [time, setTime] = useState(0);
@@ -110,12 +113,22 @@ export default function LectureRecorder() {
 
   return (
     <div className="flex flex-col h-screen bg-livecodeDark-900 text-richblack-5 font-inter">
-      <div className="flex items-center justify-between p-4 bg-livecodeDark-800 border-b border-white/10">
-        <div>
-          <h1 className="text-xl font-bold livecode-neon-text">Instructor Code Recorder</h1>
-          <p className="text-sm text-richblack-300">
-            Click Start, type your code while recording your OBS video. Stop to download the JSON.
-          </p>
+      <div className="flex items-center justify-between px-6 py-3 bg-livecodeDark-800 border-b border-white/10 z-20">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate('/dashboard/my-courses')}
+            className="flex items-center gap-2 text-sm text-richblack-200 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5 border border-white/10 transition-colors"
+            title="Return to Dashboard"
+          >
+            <IoArrowBack className="text-base" />
+            <span>Dashboard</span>
+          </button>
+          <div>
+            <h1 className="text-lg font-bold livecode-neon-text">Instructor Code Recorder</h1>
+            <p className="text-xs text-richblack-300">
+              Click Start, type your code while recording your OBS video. Stop to download the JSON stream.
+            </p>
+          </div>
         </div>
         
         <div className="flex items-center gap-4">

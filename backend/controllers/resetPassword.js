@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 exports.resetPasswordToken = async (req, res) => {
     try {
         // extract email 
-        const { email } = req.body;
+        const email = req.body.email ? req.body.email.trim().toLowerCase() : '';
 
         // email validation
         const user = await User.findOne({ email });
@@ -30,7 +30,8 @@ exports.resetPasswordToken = async (req, res) => {
 
 
         // create url
-        const url = `https://study-notion-mern-stack.netlify.app/update-password/${token}`;
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+        const url = `${frontendUrl}/update-password/${token}`;
 
         // send email containing url
         await mailSender(email, 'Password Reset Link', `Password Reset Link : ${url}`);

@@ -172,24 +172,39 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center flex flex-col sm:flex-row ">
-            <div className="flex ">
-              <span> Developed By:</span>
-
-              <Link to='https://github.com/udaydeshwal2408' target="__blank" className="text-white hover:underline mr-1"
+          <div className="text-center flex flex-col sm:flex-row items-center gap-1">
+            <div className="flex items-center">
+              <span>Made with ❤️ by</span>
+              <a
+                href="https://github.com/bhardwajshobhit758-cmyk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:underline font-medium ml-1.5 mr-1"
               >
-                Uday Deshwal
-              </Link>
+                Shobhit Bhardwaj
+              </a>
             </div>
-            <span> © 2026 LiveCode</span>
+            <span>| © 2026 LiveCode</span>
           </div>
 
-          <div className="flex items-center">
-            <a href="www.linkedin.com/in/uday-deshwal2408" className="text-white p-3 hover:bg-richblack-700 rounded-full duration-300" target="_blank" rel="noopener noreferrer">
-              <ImLinkedin2 size={17} />
+          <div className="flex items-center gap-2">
+            <a
+              href="https://www.linkedin.com/in/shobhit-bhardwaj-2a999a325/"
+              className="text-white p-2.5 hover:bg-richblack-700 rounded-full duration-300 flex items-center justify-center hover:text-blue-400"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+            >
+              <ImLinkedin2 size={18} />
             </a>
-            <a href="https://github.com/udaydeshwal2408" className="text-white p-3 hover:bg-richblack-700 rounded-full duration-300" target="_blank" rel="noopener noreferrer">
-              <ImGithub size={17} />
+            <a
+              href="https://github.com/bhardwajshobhit758-cmyk"
+              className="text-white p-2.5 hover:bg-richblack-700 rounded-full duration-300 flex items-center justify-center hover:text-richblack-50"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+            >
+              <ImGithub size={18} />
             </a>
           </div>
 

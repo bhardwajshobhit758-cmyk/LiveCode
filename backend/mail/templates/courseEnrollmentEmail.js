@@ -79,7 +79,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
                 <a class="cta" href="https://study-notion-mern-stack.netlify.app/dashboard/enrolled-courses">Go to Dashboard</a>
             </div>
             <div class="support">If you have any questions or need assistance, please feel free to reach out to us at 
-            <a href="mailto:deshwaluday2@gmail.com">deshwaluday2@gmail.com</a>. We are here to help!</div>
+            <a href="mailto:bhardwajshobhit758@gmail.com">bhardwajshobhit758@gmail.com</a>. We are here to help!</div>
         </div>
     </body>
     

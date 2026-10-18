@@ -164,9 +164,9 @@ const VideoDetails = () => {
         }
       </div>
 
-      <div className={`flex flex-col ${videoData?.codeStreamUrl || videoData?.initialCode ? 'xl:flex-row' : ''} gap-6 w-full h-full`}>
+      <div className="flex flex-col xl:flex-row gap-6 w-full h-full">
         {/* Left Column: Video and Info */}
-        <div className={`flex flex-col ${videoData?.codeStreamUrl || videoData?.initialCode ? 'xl:w-1/2' : 'w-full max-w-4xl mx-auto'}`}>
+        <div className="flex flex-col xl:w-1/2">
           {!videoData ? (
             <img
               src={previewSource}
@@ -182,7 +182,14 @@ const VideoDetails = () => {
                 playsInline
                 autoPlay
                 onEnded={() => setVideoEnded(true)}
-                src={videoData?.videoUrl}
+                src={
+                  videoData?.videoUrl &&
+                  !videoData.videoUrl.includes("images.unsplash.com") &&
+                  !videoData.videoUrl.match(/\.(jpeg|jpg|png|webp|gif|svg)$/i) &&
+                  !videoData.videoUrl.includes("commondatastorage.googleapis.com")
+                    ? videoData.videoUrl
+                    : "/sample-video.mp4"
+                }
                 crossOrigin="anonymous"
               >
                 <BigPlayButton position="center" />
@@ -249,11 +256,9 @@ const VideoDetails = () => {
         </div>
 
         {/* Right Column: Interactive Terminal Player */}
-        {(videoData?.codeStreamUrl || videoData?.initialCode) && (
-          <div className="flex flex-col xl:w-1/2 h-[600px] xl:h-auto min-h-[600px] border border-white/10 rounded-xl overflow-hidden bg-[#0B0F19]">
-            <InteractiveTerminalPlayer videoData={videoData} playerRef={playerRef} />
-          </div>
-        )}
+        <div className="flex flex-col xl:w-1/2 h-[600px] xl:h-auto min-h-[600px] border border-white/10 rounded-xl overflow-hidden bg-[#0B0F19]">
+          <InteractiveTerminalPlayer videoData={videoData} playerRef={playerRef} />
+        </div>
       </div>
     </div>
   )

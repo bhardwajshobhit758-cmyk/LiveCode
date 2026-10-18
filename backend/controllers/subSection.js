@@ -35,7 +35,7 @@ exports.createSubSection = async (req, res) => {
 
         // create entry in DB
         const SubSectionDetails = await SubSection.create(
-            { title, timeDuration: videoFileDetails.duration, description, videoUrl: videoFileDetails.secure_url, initialCode, codeStreamUrl })
+            { title, timeDuration: videoFileDetails.duration || "10:00", description, videoUrl: videoFileDetails.secure_url, initialCode, codeStreamUrl })
 
         // link subsection id to section
         // Update the corresponding section with the newly created sub-section

@@ -32,17 +32,36 @@ export default function InteractiveTerminalPlayer({ videoData, playerRef }) {
 
   // Fetch the Code Stream JSON when mounted
   useEffect(() => {
-    if (videoData?.codeStreamUrl) {
-      fetch(videoData.codeStreamUrl)
-        .then(res => res.json())
-        .then(data => {
-            setCodeStream(data);
+    const url = videoData?.codeStreamUrl;
+    // Don't attempt to parse image URLs or invalid formats as JSON code stream
+    if (url && !url.match(/\.(jpeg|jpg|png|gif|webp|svg)$/i) && !url.includes("images.unsplash.com")) {
+      fetch(url)
+        .then(async (res) => {
+          const contentType = res.headers.get("content-type") || "";
+          if (!res.ok || contentType.includes("image")) {
+            return [];
+          }
+          return res.json();
         })
-        .catch(err => console.error("Failed to load Code Stream", err));
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setCodeStream(data);
+          } else {
+            setCodeStream([]);
+          }
+        })
+        .catch((err) => {
+          console.warn("Could not load Code Stream JSON, defaulting to empty:", err?.message || err);
+          setCodeStream([]);
+        });
     } else {
-        setCodeStream([]);
+      setCodeStream([]);
     }
   }, [videoData]);
+
+  const getStartingCode = () => {
+    return videoData?.initialCode || "";
+  };
 
   // Handle Monaco Initialization
   const handleEditorDidMount = (editor, monaco) => {
@@ -52,9 +71,9 @@ export default function InteractiveTerminalPlayer({ videoData, playerRef }) {
     ydocRef.current = ydoc;
 
     const type = ydoc.getText('monaco');
-
-    if (videoData?.initialCode) {
-      type.insert(0, videoData.initialCode);
+    const starterCode = getStartingCode();
+    if (starterCode) {
+      type.insert(0, starterCode);
     }
 
     bindingRef.current = new MonacoBinding(
@@ -116,8 +135,9 @@ export default function InteractiveTerminalPlayer({ videoData, playerRef }) {
             editorRef.current.setValue('');
         }
 
-        if (videoData?.initialCode) {
-            type.insert(0, videoData.initialCode);
+        const starterCode = getStartingCode();
+        if (starterCode) {
+            type.insert(0, starterCode);
         }
 
         if (editorRef.current) {
