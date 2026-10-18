@@ -10,7 +10,10 @@ axiosInstance.interceptors.response.use(
     },
     (error) => {
         // Check if the error is 401 (Unauthorized) which usually means JWT expired
-        if (error.response && error.response.status === 401) {
+        const storedToken = localStorage.getItem("token");
+        const isDemo = storedToken && (storedToken.includes("demo_token_") || storedToken.includes("demo"));
+
+        if (error.response && error.response.status === 401 && !isDemo) {
             console.log("Session expired. Logging out...");
             
             // 1. Clear LocalStorage

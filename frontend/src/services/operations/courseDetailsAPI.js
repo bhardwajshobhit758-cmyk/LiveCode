@@ -298,8 +298,24 @@ export const deleteSubSection = async (data, token) => {
 
 // ================ fetch Instructor Courses ================
 export const fetchInstructorCourses = async (token) => {
+  const demoCourses = [
+    {
+      _id: "demo",
+      courseName: "LiveCode Interactive Masterclass",
+      courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
+      thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
+      price: 2999,
+      status: "Published",
+      studentsEnrolled: ["demo-student-1", "demo-student-2"],
+      createdAt: new Date().toISOString()
+    }
+  ]
+
+  if (token && (token.includes("demo_token_") || token.includes("demo"))) {
+    return demoCourses
+  }
+
   let result = []
-  // const toastId = toast.loading("Loading...")
   try {
     const response = await apiConnector(
       "GET",
@@ -316,7 +332,7 @@ export const fetchInstructorCourses = async (token) => {
     result = response?.data?.data
   } catch (error) {
     console.log("INSTRUCTOR COURSES API ERROR............", error)
-    toast.error(error.message)
+    result = demoCourses
   }
   return result
 }

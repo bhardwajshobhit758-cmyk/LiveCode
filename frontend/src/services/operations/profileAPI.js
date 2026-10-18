@@ -36,7 +36,37 @@ export function getUserDetails(token, navigate) {
 
 // ================ get User Enrolled Courses  ================
 export async function getUserEnrolledCourses(token) {
-  // const toastId = toast.loading("Loading...")
+  const demoFallback = [
+    {
+      _id: "demo",
+      courseName: "LiveCode Interactive Masterclass",
+      courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
+      thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
+      price: 2999,
+      totalDuration: "20.8s",
+      progressPercentage: 100,
+      createdAt: new Date().toISOString(),
+      courseContent: [
+        {
+          _id: "demo-section-1",
+          sectionName: "1: Interactive LiveCode Engine Demo",
+          subSection: [
+            {
+              _id: "demo-lecture-1",
+              title: "Interactive Code Streaming & Terminal Demo",
+              timeDuration: "20.8",
+              videoUrl: "/sample-video.mp4"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+  if (token && (token.includes("demo_token_") || token.includes("demo"))) {
+    return demoFallback
+  }
+
   let result = []
   try {
     const response = await apiConnector("GET", GET_USER_ENROLLED_COURSES_API, {token}, { Authorization: `Bearer ${token}`, })
@@ -50,38 +80,27 @@ export async function getUserEnrolledCourses(token) {
   } catch (error) {
     console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
     // Graceful fallback for portfolio / demo view
-    result = [
-      {
-        _id: "demo",
-        courseName: "LiveCode Interactive Masterclass",
-        courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
-        thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
-        totalDuration: "20.8s",
-        progressPercentage: 100,
-        courseContent: [
-          {
-            _id: "demo-section-1",
-            sectionName: "1: Interactive LiveCode Engine Demo",
-            subSection: [
-              {
-                _id: "demo-lecture-1",
-                title: "Interactive Code Streaming & Terminal Demo",
-                timeDuration: "20.8",
-                videoUrl: "/sample-video.mp4"
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    result = demoFallback
   }
-  // toast.dismiss(toastId)
   return result
 }
 
 // ================ get Instructor Data  ================
 export async function getInstructorData(token) {
-  // const toastId = toast.loading("Loading...")
+  const demoInstructorData = [
+    {
+      _id: "demo",
+      courseName: "LiveCode Interactive Masterclass",
+      courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
+      totalStudentsEnrolled: 48,
+      totalAmountGenerated: 143952
+    }
+  ]
+
+  if (token && (token.includes("demo_token_") || token.includes("demo"))) {
+    return demoInstructorData
+  }
+
   let result = []
   try {
     const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
@@ -91,8 +110,7 @@ export async function getInstructorData(token) {
     result = response?.data?.courses
   } catch (error) {
     console.log("GET_INSTRUCTOR_DATA_API API ERROR............", error)
-    toast.error("Could Not Get Instructor Data")
+    result = demoInstructorData
   }
-  // toast.dismiss(toastId)
   return result
 }
