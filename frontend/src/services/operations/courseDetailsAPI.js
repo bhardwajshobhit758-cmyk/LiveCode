@@ -300,14 +300,14 @@ export const deleteSubSection = async (data, token) => {
 export const fetchInstructorCourses = async (token) => {
   const demoCourses = [
     {
-      _id: "demo",
-      courseName: "LiveCode Interactive Masterclass",
-      courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
-      thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
-      price: 2999,
+      _id: "6ad430dfae9cc1d1e8c7a87f",
+      courseName: "getting started with react",
+      courseDescription: "full stack web development",
+      thumbnail: "https://res.cloudinary.com/vdb7edqa/image/upload/v1792291038/LiveCode/ci7e5inaazu8ckuiwqf1.jpg",
+      price: 0,
       status: "Published",
-      studentsEnrolled: ["demo-student-1", "demo-student-2"],
-      createdAt: new Date().toISOString()
+      studentsEnrolled: ["6ad42b3e2debf70138ae61bf"],
+      createdAt: "2026-10-18T02:37:19.368Z"
     }
   ]
 

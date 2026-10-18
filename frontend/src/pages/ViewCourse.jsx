@@ -18,23 +18,24 @@ import { setCourseViewSidebar } from "../slices/sidebarSlice"
 
 
 export const DEMO_COURSE_DATA = {
-  _id: "demo",
-  courseName: "LiveCode Interactive Masterclass",
-  courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
-  thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
+  _id: "6ad430dfae9cc1d1e8c7a87f",
+  courseName: "getting started with react",
+  courseDescription: "full stack web development",
+  thumbnail: "https://res.cloudinary.com/vdb7edqa/image/upload/v1792291038/LiveCode/ci7e5inaazu8ckuiwqf1.jpg",
+  price: 0,
   courseContent: [
     {
-      _id: "demo-section-1",
-      sectionName: "1: Interactive LiveCode Engine Demo",
+      _id: "6ad4314bae9cc1d1e8c7a883",
+      sectionName: "1: Introduction to React & Project Setup",
       subSection: [
         {
-          _id: "demo-lecture-1",
-          title: "Interactive Code Streaming & Terminal Demo",
-          description: "Watch code stream in real-time as the video plays. Click 'Fork & Experiment Offline' to edit the code and test it live in an in-browser Linux/Node.js terminal powered by WebContainers!",
+          _id: "6ad432b2ae9cc1d1e8c7a898",
+          title: "first code",
+          description: "first lecture of react",
           timeDuration: "20.8",
-          videoUrl: "/sample-video.mp4",
+          videoUrl: "https://res.cloudinary.com/vdb7edqa/video/upload/v1792291504/LiveCode/kaof2bve9aiftolzyhvq.mov",
           codeStreamUrl: "https://res.cloudinary.com/vdb7edqa/raw/upload/v1792291505/LiveCode/xnbporcydfvebwrxmcdn",
-          initialCode: "// LiveCode Interactive Demo\n// Watch code stream automatically with video playback!\n",
+          initialCode: "// getting started with react\n// Created by Shobhit Bhardwaj\n",
         }
       ]
     }
@@ -50,7 +51,7 @@ export default function ViewCourse({ isDemo = false }) {
   // get Full Details Of Course
   useEffect(() => {
     ; (async () => {
-      if (isDemo || courseId === "demo" || !courseId) {
+      if (isDemo || courseId === "demo" || courseId === "6ad430dfae9cc1d1e8c7a87f" || !courseId || token?.includes("demo_token_")) {
         dispatch(setCourseSectionData(DEMO_COURSE_DATA.courseContent))
         dispatch(setEntireCourseData(DEMO_COURSE_DATA))
         dispatch(setCompletedLectures([]))

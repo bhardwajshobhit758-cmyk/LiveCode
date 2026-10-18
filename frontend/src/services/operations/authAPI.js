@@ -128,7 +128,7 @@ export function login(email, password, navigate) {
           active: true,
           approved: true,
           additionalDetails: { about: "Learner & Developer" },
-          courses: ["demo"],
+          courses: ["6ad430dfae9cc1d1e8c7a87f"],
           image: "https://api.dicebear.com/5.x/initials/svg?seed=Shobhit Bhardwaj"
         },
         "24162@iiitu.ac.in": {
@@ -140,7 +140,7 @@ export function login(email, password, navigate) {
           active: true,
           approved: true,
           additionalDetails: { about: "Instructor & Developer" },
-          courses: ["demo"],
+          courses: ["6ad430dfae9cc1d1e8c7a87f"],
           image: "https://api.dicebear.com/5.x/initials/svg?seed=Shobhit Bhardwaj"
         },
         "iiitukstp@gmail.com": {
@@ -152,7 +152,7 @@ export function login(email, password, navigate) {
           active: true,
           approved: true,
           additionalDetails: { about: "Instructor & Developer" },
-          courses: ["demo"],
+          courses: ["6ad430dfae9cc1d1e8c7a87f"],
           image: "https://api.dicebear.com/5.x/initials/svg?seed=Shobhit Bhardwaj"
         }
       };

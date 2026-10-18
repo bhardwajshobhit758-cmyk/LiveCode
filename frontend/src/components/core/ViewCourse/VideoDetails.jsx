@@ -32,7 +32,7 @@ const VideoDetails = ({ isDemo = false }) => {
   const [videoEnded, setVideoEnded] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const isDemoCourse = isDemo || courseId === "demo" || !courseId
+  const isDemoCourse = isDemo || courseId === "demo" || courseId === "6ad430dfae9cc1d1e8c7a87f" || !courseId || token?.includes("demo_token_")
 
   useEffect(() => {
     ; (async () => {

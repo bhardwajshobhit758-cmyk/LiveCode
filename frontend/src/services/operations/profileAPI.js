@@ -38,24 +38,25 @@ export function getUserDetails(token, navigate) {
 export async function getUserEnrolledCourses(token) {
   const demoFallback = [
     {
-      _id: "demo",
-      courseName: "LiveCode Interactive Masterclass",
-      courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
-      thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee",
-      price: 2999,
+      _id: "6ad430dfae9cc1d1e8c7a87f",
+      courseName: "getting started with react",
+      courseDescription: "full stack web development",
+      thumbnail: "https://res.cloudinary.com/vdb7edqa/image/upload/v1792291038/LiveCode/ci7e5inaazu8ckuiwqf1.jpg",
+      price: 0,
       totalDuration: "20.8s",
       progressPercentage: 100,
-      createdAt: new Date().toISOString(),
+      createdAt: "2026-10-18T02:37:19.368Z",
       courseContent: [
         {
-          _id: "demo-section-1",
-          sectionName: "1: Interactive LiveCode Engine Demo",
+          _id: "6ad4314bae9cc1d1e8c7a883",
+          sectionName: "1: Introduction to React & Project Setup",
           subSection: [
             {
-              _id: "demo-lecture-1",
-              title: "Interactive Code Streaming & Terminal Demo",
+              _id: "6ad432b2ae9cc1d1e8c7a898",
+              title: "first code",
               timeDuration: "20.8",
-              videoUrl: "/sample-video.mp4"
+              videoUrl: "https://res.cloudinary.com/vdb7edqa/video/upload/v1792291504/LiveCode/kaof2bve9aiftolzyhvq.mov",
+              codeStreamUrl: "https://res.cloudinary.com/vdb7edqa/raw/upload/v1792291505/LiveCode/xnbporcydfvebwrxmcdn"
             }
           ]
         }
@@ -89,11 +90,11 @@ export async function getUserEnrolledCourses(token) {
 export async function getInstructorData(token) {
   const demoInstructorData = [
     {
-      _id: "demo",
-      courseName: "LiveCode Interactive Masterclass",
-      courseDescription: "Experience real-time synchronized code streaming with in-browser terminal execution.",
-      totalStudentsEnrolled: 48,
-      totalAmountGenerated: 143952
+      _id: "6ad430dfae9cc1d1e8c7a87f",
+      courseName: "getting started with react",
+      courseDescription: "full stack web development",
+      totalStudentsEnrolled: 1,
+      totalAmountGenerated: 0
     }
   ]
 
