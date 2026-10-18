@@ -80,7 +80,7 @@ function App() {
   }, [showArrow])
 
 
-  const isStudioRoute = location.pathname.startsWith('/record-lecture') || location.pathname.startsWith('/view-course');
+  const isStudioRoute = location.pathname.startsWith('/record-lecture') || location.pathname.startsWith('/view-course') || location.pathname.startsWith('/demo');
 
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
@@ -182,7 +182,15 @@ function App() {
         {/* Standalone Route for Recording Lectures (Instructor Only) */}
         <Route element={<ProtectedRoute><LectureRecorder /></ProtectedRoute>} path="record-lecture" />
 
-        {/* For the watching course lectures */}
+        {/* Public Live Demo Route (Accessible without login) */}
+        <Route element={<ViewCourse isDemo={true} />}>
+          <Route path="demo" element={<VideoDetails isDemo={true} />} />
+          <Route path="demo/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails isDemo={true} />} />
+          <Route path="view-course/demo/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails isDemo={true} />} />
+          <Route path="view-course/69db9cdb1eb2e1a9b37711ec/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails isDemo={true} />} />
+        </Route>
+
+        {/* For watching course lectures (Student, Instructor, Admin) */}
         <Route
           element={
             <ProtectedRoute>
@@ -190,12 +198,10 @@ function App() {
             </ProtectedRoute>
           }
         >
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <Route
-              path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-              element={<VideoDetails />}
-            />
-          )}
+          <Route
+            path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+            element={<VideoDetails />}
+          />
         </Route>
 
 

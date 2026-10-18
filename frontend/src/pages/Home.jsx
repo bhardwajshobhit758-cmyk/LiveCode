@@ -79,7 +79,7 @@ const Home = () => {
                             <Link to="/signup" className="livecode-button-primary px-8 py-3.5 font-bold text-lg flex items-center gap-3">
                                 Start Coding For Free
                             </Link>
-                            <Link to="/view-course/69db9cdb1eb2e1a9b37711ec/section/69db9d0f1eb2e1a9b37711f4/sub-section/69db9d661eb2e1a9b37711fd" className="livecode-glass px-8 py-3.5 font-bold text-lg hover:bg-white/10 transition-colors flex items-center gap-3">
+                            <Link to="/demo" className="livecode-glass px-8 py-3.5 font-bold text-lg hover:bg-white/10 transition-colors flex items-center gap-3">
                                 <FaPlay className="text-livecode-400 text-sm" /> View Demo
                             </Link>
                         </div>

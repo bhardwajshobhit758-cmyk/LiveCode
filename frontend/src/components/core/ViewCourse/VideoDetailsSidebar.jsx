@@ -13,7 +13,7 @@ import { HiMenuAlt1 } from 'react-icons/hi'
 
 
 
-export default function VideoDetailsSidebar({ setReviewModal }) {
+export default function VideoDetailsSidebar({ setReviewModal, isDemo = false }) {
 
   const [activeStatus, setActiveStatus] = useState("") // store curr section id
   const [videoBarActive, setVideoBarActive] = useState("") // store curr SubSection Id
@@ -21,7 +21,8 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   const location = useLocation()
   const dispatch = useDispatch();
 
-  const { sectionId, subSectionId } = useParams()
+  const { sectionId, subSectionId, courseId } = useParams()
+  const { token } = useSelector((state) => state.auth)
   const {
     courseSectionData,
     courseEntireData,
@@ -29,21 +30,19 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
     completedLectures,
   } = useSelector((state) => state.viewCourse)
 
-
   const { courseViewSidebar } = useSelector(state => state.sidebar)
-
+  const isDemoMode = isDemo || courseId === "demo" || !courseId
 
   // set which section - subSection is selected 
   useEffect(() => {
     ; (() => {
-      if (!courseSectionData.length) return
-      const currentSectionIndx = courseSectionData.findIndex((data) => data._id === sectionId)
-      const currentSubSectionIndx = courseSectionData?.[currentSectionIndx]?.subSection.findIndex((data) => data._id === subSectionId)
-      const activeSubSectionId = courseSectionData[currentSectionIndx]?.subSection?.[currentSubSectionIndx]?._id
-      setActiveStatus(courseSectionData?.[currentSectionIndx]?._id)
-      setVideoBarActive(activeSubSectionId)
+      if (!courseSectionData || !courseSectionData.length) return
+      const currentSection = (sectionId && courseSectionData.find((data) => data._id === sectionId)) || courseSectionData[0]
+      const currentSubSection = (subSectionId && currentSection?.subSection?.find((data) => data._id === subSectionId)) || currentSection?.subSection?.[0]
+      setActiveStatus(currentSection?._id || "")
+      setVideoBarActive(currentSubSection?._id || "")
     })()
-  }, [courseSectionData, courseEntireData, location.pathname])
+  }, [courseSectionData, courseEntireData, location.pathname, sectionId, subSectionId])
 
 
 
@@ -62,28 +61,39 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
               {courseViewSidebar ? <IoMdClose size={33} /> : <HiMenuAlt1 size={33} />}
             </div>
 
-            {/* go back dashboard */}
+            {/* go back dashboard or home */}
             <button
-              onClick={() => { navigate(`/dashboard/enrolled-courses`) }}
+              onClick={() => {
+                if (isDemoMode || !token) {
+                  navigate('/')
+                } else {
+                  navigate('/dashboard/enrolled-courses')
+                }
+              }}
               className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90"
               title="back"
             >
               <IoIosArrowBack size={30} />
             </button>
 
-            {/* add review button */}
-            <IconBtn
-              text="Add Review"
-              // customClasses="ml-auto"
-              onclick={() => setReviewModal(true)}
-            />
+            {/* review or demo indicator */}
+            {!isDemoMode && token ? (
+              <IconBtn
+                text="Add Review"
+                onclick={() => setReviewModal(true)}
+              />
+            ) : (
+              <span className="livecode-neon-text font-mono text-xs px-2.5 py-1 bg-livecode-400/10 rounded-full border border-livecode-400/30">
+                Live Demo
+              </span>
+            )}
           </div>
 
           {/* course Name - total No Of Lectures*/}
           <div className="flex flex-col">
             <p>{courseEntireData?.courseName}</p>
             <p className="text-sm font-semibold text-richblack-500">
-              {completedLectures?.length} / {totalNoOfLectures}
+              {completedLectures?.length || 0} / {totalNoOfLectures || 1}
             </p>
           </div>
         </div>
@@ -104,7 +114,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-[12px] font-medium">
-                    Lession {section?.subSection.length}
+                    Lesson {section?.subSection?.length || 0}
                   </span>
                   <span
                     className={`${activeStatus === section?._id
@@ -120,7 +130,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
               {/* Sub Sections */}
               {activeStatus === section?._id && (
                 <div className="transition-[height] duration-500 ease-in-out">
-                  {section.subSection.map((topic, i) => (
+                  {section?.subSection?.map((topic, i) => (
                     <div
                       className={`flex gap-3  px-5 py-2 ${videoBarActive === topic._id
                         ? "bg-yellow-200 font-semibold text-richblack-800"
@@ -128,14 +138,17 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                         } `}
                       key={i}
                       onClick={() => {
-                        navigate(`/view-course/${courseEntireData?._id}/section/${section?._id}/sub-section/${topic?._id}`)
+                        const targetUrl = isDemoMode
+                          ? `/demo/section/${section?._id}/sub-section/${topic?._id}`
+                          : `/view-course/${courseEntireData?._id}/section/${section?._id}/sub-section/${topic?._id}`
+                        navigate(targetUrl)
                         setVideoBarActive(topic._id)
                         courseViewSidebar && window.innerWidth <= 640 ? dispatch(setCourseViewSidebar(false)) : null;
                       }}
                     >
                       <input
                         type="checkbox"
-                        checked={completedLectures.includes(topic?._id)}
+                        checked={completedLectures?.includes(topic?._id) || false}
                         onChange={() => { }}
                       />
                       {topic.title}
